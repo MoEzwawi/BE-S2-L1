@@ -17,22 +17,23 @@ public class Main {
             arrayOfIntegers[i] = rndm.nextInt(1,11);
         }
         log.info(Arrays.toString(arrayOfIntegers));
-        log.info("Scegli l'elemento da modificare (da 1 a 5) o premi 0 per uscire");
         Scanner input = new Scanner(System.in);
-        int position = Integer.parseInt(input.nextLine());
-        while (position !=0) {
+        while (true) {
             try {
+                log.info("Scegli l'elemento da modificare (da 1 a 5) o premi 0 per uscire");
+                int position = Integer.parseInt(input.nextLine());
+                if(position==0)break;
                 log.info("Attualmente l'elemento " + position + " ha un valore di " + arrayOfIntegers[position - 1]);
                 log.info("Inserisci il nuovo valore");
                 int newInt = Integer.parseInt(input.nextLine());
                 arrayOfIntegers[position - 1] = newInt;
                 log.info("Risultato: " + Arrays.toString(arrayOfIntegers));
-                log.info("Scegli l'elemento da modificare (da 1 a 5) o premi 0 per uscire");
-                position = Integer.parseInt(input.nextLine());
             } catch (ArrayIndexOutOfBoundsException ex){
-                log.error("Indica un elemento da 1 a 5 o premi 0 per uscire");
-                position = Integer.parseInt(input.nextLine());
+                log.error("Elemento inesistente");
+            } catch (NumberFormatException ex){
+                log.error("Inserisci solo caratteri numerici");
             }
         }
+        input.close();
     }
 }
